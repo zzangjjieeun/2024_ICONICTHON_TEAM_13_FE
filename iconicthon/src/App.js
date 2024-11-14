@@ -6,6 +6,8 @@ import RegisterProfessor from './RegisterProfessor/RegisterProfessor';
 import ChatRoomList from './ChatRoomList/ChatRoomList';
 import ChatRoom from './ChatRoom/ChatRoom';
 import Login from './Login/Loign';
+import ProfessorPage from './ProfessorPage/ProfessorPage';
+import ProfessorList from './ProfessorList/ProfessorList';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/register-professor" element={<RegisterProfessor />} />
         <Route path="/chatroomlist" element={<ChatRoomList fullWidth />} />
         <Route path="/chatroom/:chatroomId" element={<ChatRoom fullWidth />} />
+        <Route path="/professor-page" element={<ProfessorPage />} /> 
+        <Route path="/professor-list" element={<ProfessorList />} /> 
       </Routes>
     </Router>
   );

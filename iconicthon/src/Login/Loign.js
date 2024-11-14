@@ -36,7 +36,7 @@ function Login() {
                 sessionStorage.setItem('username', userName);
 
                 // 메인 페이지 또는 로그인 이후의 페이지로 이동
-                navigate('/chatroomlist'); // '/main' 경로는 예시입니다. 필요한 경로로 변경하세요.
+                navigate('/professor-list'); // '/main' 경로는 예시입니다. 필요한 경로로 변경하세요.
             }
         } catch (error) {
             console.error('로그인 오류:', error);
