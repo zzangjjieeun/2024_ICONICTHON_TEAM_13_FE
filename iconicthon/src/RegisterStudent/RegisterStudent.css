@@ -1,0 +1,63 @@
+.register-student {
+    width: 450px;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+}
+
+.register-student h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333;
+}
+
+.register-student label {
+    display: block;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #333333;
+}
+
+.register-student input[type="text"],
+.register-student input[type="email"],
+.register-student input[type="password"],
+.register-student select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333333;
+}
+
+.register-student .date-select {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.register-student .gender-options {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333333;
+}
+
+.register-student button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 30px;
+    background-color: #333333;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
