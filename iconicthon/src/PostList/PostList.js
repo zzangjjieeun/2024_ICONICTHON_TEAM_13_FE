@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import logo from './logo.png';
 import { useNavigate } from 'react-router-dom';
 import './PostList.css';
 import { FaSearch, FaBell, FaUserCircle, FaCog, FaPlus } from 'react-icons/fa';
@@ -10,6 +10,9 @@ function PostList() {
     const postsPerPage = 6;
     
     const navigate = useNavigate();
+    const handleLogoClick = () => {
+        navigate('/');
+    };
 
     const posts = [
         {
@@ -75,7 +78,7 @@ function PostList() {
     return (
         <div className="post-list-container">
             <header className="post-list-header">
-                <div className="logo">로고</div>
+                <img src={logo} alt="로고" className="logo" onClick={handleLogoClick} />
                 <div className="icon-group">
                     <FaBell className="icon" />
                     <FaUserCircle className="icon" />

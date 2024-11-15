@@ -1,28 +1,19 @@
-/* ChatRoom.css */
-
-/* 로고를 포함한 헤더 스타일 */
-.header {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #f5f5f5;
-    border-bottom: 1px solid #ddd;
-}
-
-.logo {
-    cursor: pointer;
-    width: 100px;
-    height: auto;
-}
-
 .chatroom-container {
     display: flex;
     width: 100vw;
     height: 100vh;
 }
 
+.chatroom-list {
+    width: 30vw;
+    /* Adjust this as needed for the left side width */
+    padding: 20px;
+    overflow-y: auto;
+}
+
 .chatroom {
-    flex: 1;
+    width: 70vw;
+    /* Adjust this as needed for the right side width */
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -40,21 +31,4 @@
 .chat-input {
     display: flex;
     align-items: center;
-}
-
-.chat-input input[type="text"] {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-right: 10px;
-}
-
-.chat-input button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
