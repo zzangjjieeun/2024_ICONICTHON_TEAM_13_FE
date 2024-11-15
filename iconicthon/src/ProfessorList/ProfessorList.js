@@ -32,7 +32,7 @@ function ProfessorList() {
         <div className="professor-list-page">
             <div className="header">
                 <img src={logo} alt="Logo" className="logo" />
-                <h1>구독 목록</h1>
+                <h1>교수님 목록</h1>
             </div>
             <ul className="professor-list">
                 {professors.map((professor) => (

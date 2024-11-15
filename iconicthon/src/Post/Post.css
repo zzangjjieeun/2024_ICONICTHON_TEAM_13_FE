@@ -1,124 +1,108 @@
+/* 기본 스타일 설정 */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    color: #333;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
+/* 헤더 스타일 */
 .header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f5f5f5;
     border-bottom: 1px solid #ddd;
 }
 
+/* 로고 이미지 스타일 */
 .logo {
-    font-size: 24px;
-    font-weight: bold;
+    width: 100px;
+    /* 로고 이미지 크기 조정 */
+    height: auto;
+    margin-right: auto;
+    /* 왼쪽 정렬 */
 }
 
-.icons .icon {
-    width: 24px;
-    height: 24px;
-    margin-left: 15px;
-    cursor: pointer;
-}
-
-.container {
+/* 아이콘 스타일 */
+.icons {
     display: flex;
+    gap: 10px;
 }
 
-.sidebar {
-    width: 30px;
-    padding: 30px;
-    border-right: 2px solid #ddd;
-}
-
-.sidebar .icon {
+.icon {
     font-size: 24px;
     cursor: pointer;
 }
 
-.main-content {
-    flex-grow: 1;
+/* 컨테이너 스타일 */
+.container {
     padding: 20px;
 }
 
-.search-bar {
+/* 프로필 섹션 스타일 */
+.profile-section {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.search-bar input {
-    width: 60%;
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 15px;
 }
 
-.search-bar button {
-    background: none;
-    border: none;
-    font-size: 18px;
-    margin-left: 5px;
-    cursor: pointer;
+.professor-name {
+    font-size: 24px;
+    font-weight: bold;
 }
 
-.post-list {
-    margin-top: 20px;
+/* 포스트 콘텐츠 스타일 */
+.post-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    /* 너비 제한 */
+    margin: 0 auto;
+    /* 가운데 정렬 */
 }
 
-.post-item {
+/* 포스트 헤더 스타일 */
+.post-header {
     display: flex;
     align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
 }
 
-.post-item .icon {
-    font-size: 18px;
+.post-title {
+    font-size: 28px;
+    font-weight: bold;
     margin-right: 10px;
 }
 
-.post-text h3 {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.post-text p {
-    font-size: 12px;
-    color: #888;
-}
-
-.pagination {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.pagination button, .pagination span {
-    padding: 5px 10px;
-    margin: 0 5px;
+.header-icon {
+    font-size: 20px;
     cursor: pointer;
+    margin-left: 10px;
 }
 
-.pagination button {
-    border: none;
-    background: none;
-    font-weight: bold;
+/* 본문 스타일 */
+.content-text {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 20px;
 }
 
-.pagination span.active {
-    color: white;
-    background-color: #333;
-    border-radius: 5px;
-    padding: 5px 10px;
+/* 액션 아이콘 스타일 */
+.actions {
+    display: flex;
+    gap: 15px;
+}
+
+.action-icon {
+    font-size: 24px;
+    cursor: pointer;
 }

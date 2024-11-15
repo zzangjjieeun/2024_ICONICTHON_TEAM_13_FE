@@ -2,13 +2,18 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ChatRoomList.css';
 import profileImage from './profile-image.png';
+import logo from './logo.png';
 
 function ChatRoomList({ fullWidth }) {
     const [chatRooms, setChatRooms] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const navigate = useNavigate();
     const socketRef = useRef(null);
     const username = sessionStorage.getItem('username') || 'Guest';
+    const navigate = useNavigate(); // 중복된 useNavigate 제거
+
+    const handleLogoClick = () => {
+        navigate('/'); // 루트 경로로 이동
+    };
 
     useEffect(() => {
         // 초기 더미 채팅방 설정
@@ -97,34 +102,40 @@ function ChatRoomList({ fullWidth }) {
     );
 
     return (
-        <div className={`chatroom-list ${fullWidth ? 'full-width' : 'narrowed'}`}>
-            <h2>채팅방 목록 - {username}님 환영합니다!</h2>
-            <div className="search-container">
-                <span className="search-icon">🔍</span>
-                <input
-                    type="text"
-                    placeholder="이름을 검색하세요..."
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                />
-                <button className="add-chatroom-button" onClick={handleAddChatRoom}>+</button>
+        <div className="chatroom-container">
+            <header className="header">
+                <img src={logo} alt="로고" className="logo" onClick={handleLogoClick} />
+            </header>
+
+            <div className={`chatroom-list ${fullWidth ? 'full-width' : 'narrowed'}`}>
+                <h2>채팅방 목록 - {username}님 환영합니다!</h2>
+                <div className="search-container">
+                    <span className="search-icon">🔍</span>
+                    <input
+                        type="text"
+                        placeholder="이름을 검색하세요..."
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                    />
+                    <button className="add-chatroom-button" onClick={handleAddChatRoom}>+</button>
+                </div>
+                <ul>
+                    {filteredChatRooms.map((chatRoom) => (
+                        <li
+                            key={chatRoom.chatroomId}
+                            className="chatroom-item"
+                            onClick={() => handleChatRoomClick(chatRoom.chatroomId)}
+                        >
+                            <img src={profileImage} alt="Profile" className="profile-image" />
+                            <div className="chatroom-info">
+                                <h3>{chatRoom.chatroomName}</h3>
+                                <p>마지막 메시지: {chatRoom.lastMessage}</p>
+                                <p>업데이트: {formatRelativeTime(chatRoom.lastUpdated)}</p>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
             </div>
-            <ul>
-                {filteredChatRooms.map((chatRoom) => (
-                    <li
-                        key={chatRoom.chatroomId}
-                        className="chatroom-item"
-                        onClick={() => handleChatRoomClick(chatRoom.chatroomId)}
-                    >
-                        <img src={profileImage} alt="Profile" className="profile-image" />
-                        <div className="chatroom-info">
-                            <h3>{chatRoom.chatroomName}</h3>
-                            <p>마지막 메시지: {chatRoom.lastMessage}</p>
-                            <p>업데이트: {formatRelativeTime(chatRoom.lastUpdated)}</p>
-                        </div>
-                    </li>
-                ))}
-            </ul>
         </div>
     );
 }

@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import './ProfessorPage.css';
 import logo from './logo.png';
 import profilePic from './profile-pic.png';
 import wallpaper from './wall-paper.jpg';
-import cat1 from './cat1.jpg'
-import cat2 from './cat2.jpg'
-import { useNavigate } from 'react-router-dom';
-import { FaMessage } from "react-icons/fa6";
+import cat1 from './cat1.jpg';
+import cat2 from './cat2.jpg';
 import { FaBell, FaUser, FaCog } from 'react-icons/fa';
+import { FaMessage } from "react-icons/fa6";
+import axios from 'axios';
 
 function ProfessorPage() {
+    const { id } = useParams(); // URL의 professor ID
     const navigate = useNavigate();
+    const [professor, setProfessor] = useState({ name: '', department: '' });
+
+    useEffect(() => {
+        const fetchProfessor = async () => {
+            try {
+                const accessToken = sessionStorage.getItem('accessToken');
+                const response = await axios.get(`http://3.37.18.18:8080/api/professors/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                });
+                setProfessor(response.data.data);
+            } catch (error) {
+                console.error('Failed to fetch professor:', error);
+            }
+        };
+        fetchProfessor();
+    }, [id]);
 
     const handlePostClick = (postId) => {
         navigate(`/post/${postId}`);
@@ -19,7 +39,7 @@ function ProfessorPage() {
     return (
         <div className="professor-page">
             <div className="banner" style={{ backgroundImage: `url(${wallpaper})` }}>
-                <img src={logo} alt="Logo" className="logo" onClick={() => navigate('/main')} />
+                <img src={logo} alt="Logo" className="logo" onClick={() => navigate('/')} />
                 <div className="banner-icons">
                     <FaMessage className="icon" onClick={() => navigate('/chatroomlist')} />
                     <FaBell className="icon" />
@@ -29,14 +49,14 @@ function ProfessorPage() {
             </div>
             <div className="profile-container">
                 <img src={profilePic} alt="Profile" className="profile-picture" />
-                <div className="professor-name">김동국</div>
+                <div className="professor-name">{professor.name}</div>
             </div>
 
             <div className="main-content">
                 <div className="section professor-info">
                     <div className="professor-quote-box">
                         <h3>교수님의 한 마디</h3>
-                        <p>안녕하세요. 저는 정보통신공학과 교수 김동국입니다.</p>
+                        <p>안녕하세요. 저는 {professor.department} 교수 {professor.name}입니다.</p>
                     </div>
                     <div>
                         <h3>교수님의 소개</h3>

@@ -15,7 +15,8 @@
     position: absolute;
     top: 3px;
     left: 10px;
-    width: 150px;
+    width: 150px !important;
+    /* 로고 크기 2배 확대 */
     cursor: pointer;
 }
 
@@ -38,15 +39,16 @@
 }
 
 .profile-picture {
-    width: 180px;
-    height: 180px;
+    width: 180px !important;
+    /* 프로필 사진 크기 2배 확대 */
+    height: 180px !important;
     border-radius: 50%;
     border: 4px solid white;
 }
 
 .professor-name {
-    margin-top: 10px;
-    font-size: 35px;
+    font-size: 35px !important;
+    /* 이름 크기 2배 확대 */
     font-weight: bold;
     color: #333;
 }
@@ -58,6 +60,7 @@
     gap: 20px;
     padding: 20px;
     align-items: stretch;
+    margin-top: -100px;
 }
 
 .section {
@@ -75,7 +78,6 @@
     border-radius: 8px;
     margin-bottom: 20px;
     line-height: 1.6;
-    /* Add more spacing between lines */
 }
 
 .professor-info h3,
@@ -83,6 +85,12 @@
 .announcement h3 {
     margin-bottom: 10px;
     font-size: 18px;
+}
+
+.professor-info {
+    display: flex;
+    flex-direction: column;
+    /* 가로에서 세로 배치로 변경 */
 }
 
 .professor-info ul {
@@ -93,7 +101,6 @@
 
 .professor-info ul li {
     margin-top: 8px;
-    /* Add spacing between list items */
     display: flex;
     align-items: center;
 }
@@ -140,9 +147,7 @@
 .image-posts {
     display: flex;
     justify-content: center;
-    /* Center align images */
     gap: 30px;
-    /* Add larger spacing between images */
     margin-top: 20px;
 }
 
@@ -171,7 +176,6 @@
     align-items: center;
     font-size: 1em;
     margin-bottom: 12px;
-    /* Add spacing between announcement items */
     color: #333;
 }
 

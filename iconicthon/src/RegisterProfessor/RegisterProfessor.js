@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './RegisterProfessor.css';
 
 function RegisterProfessor() {
@@ -11,10 +12,10 @@ function RegisterProfessor() {
         birthMonth: '1',
         birthDate: '1',
         gender: '',
-        college: '',
         department: '',
-        hobbies: ['', '', ''], // 취미 필드 3개 추가
+        hobbies: ['', '', ''],
     });
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -35,39 +36,37 @@ function RegisterProfessor() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const formattedBirth = `${formData.birthYear.slice(2)}${formData.birthMonth.padStart(2, '0')}${formData.birthDate.padStart(2, '0')}`;
+
         try {
-            const response = await axios.post('/api/register/professor', {
-                professorEmail: formData.email,
-                professorPassword: formData.password,
-                professorName: formData.name,
-                professorBirth: `${formData.birthYear}-${formData.birthMonth}-${formData.birthDate}`,
-                professorGender: formData.gender,
-                professorCollege: formData.college,
-                professorDepartment: formData.department,
-                professorHobbies: formData.hobbies,
+            const response = await axios.post('http://3.37.18.18:8080/api/register', {
+                name: formData.name,
+                email: formData.email,
+                password: formData.password,
+                birth: formattedBirth,
+                gender: formData.gender === '남성' ? 0 : 1,
+                userType: 1,  // 교수 사용자 유형
+                department: formData.department,
+                interests: formData.hobbies.filter(hobby => hobby),  // 빈 취미 제외
             });
-            alert(`회원가입이 완료되었습니다. 사용자 ID: ${response.data.data.userId}`);
+
+            alert(`회원가입이 완료되었습니다. 사용자 ID: ${response.data.data.memberId}`);
+            navigate('/login');  // 회원가입 성공 후 로그인 페이지로 이동
         } catch (error) {
             console.error('회원가입 오류:', error);
             alert('회원가입에 실패했습니다.');
         }
     };
 
-    const generateYears = () => {
-        const years = [];
-        for (let i = 1900; i <= 2024; i++) {
-            years.push(i);
-        }
-        return years;
-    };
-
+    const generateYears = () => Array.from({ length: 125 }, (_, i) => 1900 + i);
     const generateMonths = () => Array.from({ length: 12 }, (_, i) => i + 1);
     const generateDays = () => Array.from({ length: 31 }, (_, i) => i + 1);
 
     const colleges = {
         "불교대학": ["불교학부", "문화유산학과"],
         "문과대학": ["국어국문문예창작학부", "영어영문학부", "일본학과", "중어중문학과", "철학과", "사학과"],
-        "이과대학": ["수학과", "화학과", "통계학과","물리학과"],
+        "이과대학": ["수학과", "화학과", "통계학과", "물리학과"],
         "법과대학": ["법학과"],
         "사회과학대학": ["정치행정학부", "경제학과", "국제통상학과", "사회언론정보학부", "식품산업관리학과", "광고홍보학과", "사회복지학과"],
         "경찰사법대학": ["경찰행정학부"],
@@ -88,6 +87,7 @@ function RegisterProfessor() {
             department: '',
         });
     };
+
 
     return (
         <div className="register-professor-container">
@@ -128,23 +128,17 @@ function RegisterProfessor() {
                     <div className="date-select">
                         <select name="birthYear" value={formData.birthYear} onChange={handleChange}>
                             {generateYears().map((year) => (
-                                <option key={year} value={year}>
-                                    {year}년
-                                </option>
+                                <option key={year} value={year}>{year}년</option>
                             ))}
                         </select>
                         <select name="birthMonth" value={formData.birthMonth} onChange={handleChange}>
                             {generateMonths().map((month) => (
-                                <option key={month} value={month}>
-                                    {month}월
-                                </option>
+                                <option key={month} value={month}>{month}월</option>
                             ))}
                         </select>
                         <select name="birthDate" value={formData.birthDate} onChange={handleChange}>
                             {generateDays().map((day) => (
-                                <option key={day} value={day}>
-                                    {day}일
-                                </option>
+                                <option key={day} value={day}>{day}일</option>
                             ))}
                         </select>
                     </div>
@@ -175,7 +169,6 @@ function RegisterProfessor() {
                         </div>
                     </div>
 
-
                     <label>단과대학</label>
                     <select name="college" value={formData.college} onChange={handleCollegeChange} required>
                         <option value="">단과대학을 선택하세요</option>
@@ -202,7 +195,6 @@ function RegisterProfessor() {
                                 </option>
                             ))}
                     </select>
-                    {/* 취미 입력란 */}
                     <label>취미</label>
                     {[0, 1, 2].map((index) => (
                         <input
@@ -214,7 +206,6 @@ function RegisterProfessor() {
                             placeholder="취미를 입력해주세요"
                         />
                     ))}
-
 
                     <button type="submit">회원가입</button>
                 </form>
